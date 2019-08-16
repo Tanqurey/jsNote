@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Drag</title>
+  <style>
+    ul {
+      height: 360px;
+      width: 200px;
+      float: left;
+      margin-left: 15px;
+      padding: 0;
+    }
+
+    .left {
+      border: 1px solid red
+    }
+
+    .right {
+      border: 1px solid blue
+    }
+
+    li {
+      height: 100px;
+      width: 200px;
+      background-color: green;
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="left">
+    <li class="li-left" draggable="true">left</li>
+  </ul>
+  <ul class="right">
+    <li class="li-right" draggable="true">right</li>
+  </ul>
+  <script>
+
+    window.onload = () => {
+      function my$(className) {
+        return document.getElementsByClassName(className)[0]
+      }
+      my$('li-left').ondragend = function (e1) {
+        let that = this
+        my$('right').ondrop = function (e2) {
+          e2.preventDefault()
+          console.log(e1.target)
+          console.log(e2.target)
+          my$('left').removeChild(that)
+          this.appendChild(that)
+        }
+      }
+
+      my$('right').ondragover = function (e) {
+        e.preventDefault()
+      }
+
+    }
+  </script>
+</body>
+
+</html>
