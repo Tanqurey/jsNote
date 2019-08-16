@@ -16,7 +16,7 @@ encodeURIComponent()
 更常使用，因为我们大多数时候是对查询字符串进行编码
 
 相应的解码方法时：
-decode/decodeURI
+decodeURI/decodeURIComponent
 
 
 2.eval()

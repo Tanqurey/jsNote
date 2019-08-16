@@ -25,7 +25,7 @@ with(objName){
   some statements}
 
   注意：大量使用with严重降低性能。在with代码块中的变量首先是一个局部变量，
-  找不到时再去objName中找
+  找不到时再去objName中找，在objName找不到时就会在全局创建，造成变量泄露
 */
 
 with(obj) {
@@ -35,3 +35,4 @@ with(obj) {
   hobby = 'running'//忽略
 }
 console.log(obj)
+console.log(hobby)//变量泄露

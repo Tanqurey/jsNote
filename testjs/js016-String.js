@@ -2,7 +2,7 @@
 讲解String基本包装类型
 
 1.字符方法
-charAt/charCodeAt() 返回指定位置的字符值
+charAt/charCodeAt() 返回指定位置的字符值/字符编码值
 
 2.字符串创建方法
 1).slice/.substring
