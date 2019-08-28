@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>js drag</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .drag {
+      height: 150px;
+      width: 150px;
+      background-color: red;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="drag"></div>
+</body>
+<script>
+  /*
+  1、元素想要被拖动，它的postion属性一定要是relative或absolute
+
+    2、通过event.clientX和event.clientY获取鼠标的坐标
+
+    3、onmousemove是绑定在document元素上而不是拖拽元素本身，这样能解决快速拖动造成的延迟或停止移动的问题
+  */
+
+  window.onload = function () {
+    let isDrag = false
+    let dragBox = document.querySelector('.drag')
+    let innerX
+    let innerY
+
+    dragBox.onmousedown = function (e) {
+      e = e || window.event
+      isDrag = true
+      innerX = e.clientX - this.offsetLeft
+      innerY = e.clientY - this.offsetTop
+    }
+
+    dragBox.onmouseup = function () {
+      isDrag = false
+    }
+
+    document.onmousemove = function (e) {
+      if (!isDrag) return
+      e = e || window.event
+      let windowWidth = window.innerWidth
+      let windowHeight = window.innerHeight
+      console.log(windowWidth + '==' + windowHeight)
+
+      let left = e.clientX - innerX
+      let top = e.clientY - innerY
+      if (left < 0) {
+        left = 0
+      } else if (left > windowWidth - dragBox.offsetWidth) {
+        left = windowWidth - dragBox.offsetWidth
+      }
+
+      if (top < 0) {
+        top = 0
+      } else if (top > windowHeight - dragBox.offsetHeight) {
+        top = windowHeight - dragBox.offsetHeight
+      }
+      dragBox.style.left = left + 'px'
+      dragBox.style.top = top + 'px'
+
+    }
+
+  }
+</script>
+
+</html>
